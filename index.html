@@ -11,32 +11,49 @@
 <body>
 <main>
 <div class="top"><h1>Home hub</h1><button class="theme" id="theme" aria-label="Switch theme">🌙</button></div>
-<div class="stats"><div class="stat od"><b id="sOd">0</b>overdue</div><div class="stat"><b id="sWeek">0</b>due this week</div><div class="stat"><b id="sAll">0</b>total chores</div></div>
+
 <div class="tabs" role="tablist">
   <button class="tab" role="tab" data-tab="due"><span class="ic">🏠</span><span>Today</span></button>
   <button class="tab" role="tab" data-tab="all"><span class="ic">🧹</span><span>Chores</span></button>
-  <button class="tab" role="tab" data-tab="meals"><span class="ic">🍽️</span><span>Meals</span></button>
-  <button class="tab" role="tab" data-tab="shop"><span class="ic">🛒</span><span>Shop</span></button>
+  <button class="tab" role="tab" data-tab="food"><span class="ic">🍽️</span><span>Food</span></button>
   <button class="tab" role="tab" data-tab="bills"><span class="ic">💡</span><span>Bills</span></button>
-  <button class="tab" role="tab" data-tab="people"><span class="ic">👨‍👩‍👧</span><span>People</span></button>
+  <button class="tab" role="tab" data-tab="people"><span class="ic">👨‍👩‍👧</span><span>Family</span></button>
 </div>
 
 <div id="vDue"></div>
 
 <div id="vAll" hidden>
+  <p class="note" style="margin:0 0 10px">Tap a chore to see more. Tap ✓ when it is done!</p>
   <div class="two"><input id="q" type="search" placeholder="Search chores" aria-label="Search chores"><select id="fWho" aria-label="Filter by person"></select></div>
   <div id="allList"></div>
 </div>
 
-<div id="vMeals" hidden>
-  <div class="acts" style="margin:0 0 12px"><button class="btn" data-act="suggest">🎲 Suggest dinners</button><button class="btn ghost" data-act="mealshop">🛒 Add meals to shopping list</button><button class="btn ghost" data-act="clearmeals">Clear week</button></div>
-  <div id="mealGrid"></div>
-</div>
+<div id="vFood" hidden>
+  <div class="seg" id="seg"><button class="pick" data-act="sub" data-id="menu">📅 Menu</button><button class="pick" data-act="sub" data-id="foods">❤️ Our foods</button><button class="pick" data-act="sub" data-id="shop">🛒 Shopping</button></div>
 
-<div id="vShop" hidden>
-  <div class="two" style="grid-template-columns:1fr auto"><input id="sIn" placeholder="Add an item" aria-label="Shopping item"><button class="btn" data-act="sadd">Add</button></div>
-  <div class="chips" id="shopQ" style="margin:10px 0"></div>
-  <div id="shopList"></div>
+  <div id="pMenu">
+    <div class="acts" style="margin:0 0 10px"><button class="btn" data-act="plan">✨ Plan my week</button><button class="btn ghost" data-act="mealshop">🛒 Make shopping list</button><button class="btn ghost" data-act="clearmeals">Start over</button></div>
+    <p class="note" style="margin:0 0 10px">Type a meal, pick one from the list, or tap 🎲 for an idea.</p>
+    <details class="card pat"><summary>🎯 Dinner pattern: pick a food type for each day</summary><div id="patGrid"></div></details>
+    <div id="mealGrid"></div>
+  </div>
+
+  <div id="pFoods" hidden>
+    <p class="note" style="margin:0 0 10px">Foods your family likes. “Plan my week” picks from here, and tapping 🤍 makes a food a favourite so it gets picked more.</p>
+    <div class="card" style="padding:14px;margin-bottom:6px">
+      <label for="fName">Add a food</label><input id="fName" placeholder="e.g. Fish fingers">
+      <div class="two"><div><label for="fCat">What kind?</label><select id="fCat"><option value="">✨ Auto</option><option value="pasta">🍝 Pasta</option><option value="rice">🍚 Rice</option><option value="chicken">🍗 Chicken</option><option value="fish">🐟 Fish</option><option value="veggie">🥦 Veggie</option><option value="soup">🥣 Soup</option><option value="egg">🥚 Eggs</option><option value="fun">🍕 Fun food</option><option value="other">🍽️ Other</option></select></div><div><label for="fMeal">For</label><select id="fMeal"><option value="d">🌙 Dinner</option><option value="l">☀️ Lunch</option><option value="b">🌅 Breakfast</option><option value="bld">Any meal</option></select></div></div>
+      <label for="fIng">Things to buy (optional)</label><input id="fIng" placeholder="e.g. fish fingers, peas, potatoes">
+      <div class="acts"><button class="btn" data-act="fadd">➕ Add food</button></div>
+    </div>
+    <div id="foodList"></div>
+  </div>
+
+  <div id="pShop" hidden>
+    <div class="two" style="grid-template-columns:1fr auto"><input id="sIn" placeholder="Add an item" aria-label="Shopping item"><button class="btn" data-act="sadd">Add</button></div>
+    <div class="chips" id="shopQ" style="margin:10px 0"></div>
+    <div id="shopList"></div>
+  </div>
 </div>
 
 <div id="vBills" hidden>
@@ -50,7 +67,7 @@
 </div>
 
 <div id="vPeople" hidden>
-  <h2>Partners</h2>
+  <h2>👨‍👩‍👧 Family</h2>
   <div class="card" id="partners"></div>
   <div class="two" style="margin-top:10px"><input id="pName" placeholder="Name" aria-label="Partner name"><input id="pMail" type="email" placeholder="Email (optional)" aria-label="Partner email"></div>
   <div class="acts"><button class="btn" id="addPartner">👋 Add partner</button></div>

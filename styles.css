@@ -131,3 +131,11 @@ input,select,textarea{border-radius:12px;border:2px solid var(--line)}
 .fab:hover,.theme:hover{animation:wiggle .5s}
 .btn:hover{transform:translateY(-1px)}
 }
+.seg{display:flex;gap:8px;margin-bottom:12px}.seg .pick{flex:1 1 0;text-align:center;padding:10px 6px}
+details.pat{padding:12px 14px;margin:10px 0}details.pat summary{cursor:pointer;font-weight:700}
+details.pat .slot{margin:8px 0}
+.inp{display:flex;gap:6px}.inp input{flex:1;min-width:0}
+.roll,.ico{border:2px solid var(--line);background:var(--panel);border-radius:12px;padding:0 10px;font-size:1.15rem;cursor:pointer}
+.ico{border:0;background:transparent;font-size:1.3rem;padding:4px 6px}
+.tap{cursor:pointer;min-width:0}.row.open{background:linear-gradient(90deg,rgba(123,92,255,.08),transparent)}
+.pat .slot span{font-weight:700}
