@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Home hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+<h1>Home hub</h1>
+<div class="stats"><div class="stat od"><b id="sOd">0</b>overdue</div><div class="stat"><b id="sWeek">0</b>due this week</div><div class="stat"><b id="sAll">0</b>total chores</div></div>
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" data-tab="due">Today</button>
+  <button class="tab" role="tab" data-tab="all">Chores</button>
+  <button class="tab" role="tab" data-tab="meals">Meals</button>
+  <button class="tab" role="tab" data-tab="shop">Shop</button>
+  <button class="tab" role="tab" data-tab="bills">Bills</button>
+  <button class="tab" role="tab" data-tab="people">People</button>
+</div>
+
+<div id="vDue"></div>
+
+<div id="vAll" hidden>
+  <div class="two"><input id="q" type="search" placeholder="Search chores" aria-label="Search chores"><select id="fWho" aria-label="Filter by person"></select></div>
+  <div id="allList"></div>
+</div>
+
+<div id="vMeals" hidden>
+  <div class="acts" style="margin:0 0 12px"><button class="btn" data-act="suggest">Suggest dinners</button><button class="btn ghost" data-act="mealshop">Add meals to shopping list</button><button class="btn ghost" data-act="clearmeals">Clear week</button></div>
+  <div id="mealGrid"></div>
+</div>
+
+<div id="vShop" hidden>
+  <div class="two" style="grid-template-columns:1fr auto"><input id="sIn" placeholder="Add an item" aria-label="Shopping item"><button class="btn" data-act="sadd">Add</button></div>
+  <div class="chips" id="shopQ" style="margin:10px 0"></div>
+  <div id="shopList"></div>
+</div>
+
+<div id="vBills" hidden>
+  <label>Common bills and renewals</label><div class="chips" id="billQ"></div>
+  <div class="card" style="padding:14px;margin:12px 0">
+    <div class="two"><div><label for="bName">Bill or renewal</label><input id="bName" placeholder="e.g. Electricity"></div><div><label for="bAmt">Amount (optional)</label><input id="bAmt" type="number" min="0" placeholder="0"></div></div>
+    <div class="two"><div><label for="bFreq">Repeats</label><select id="bFreq"><option value="1w">Weekly</option><option value="1m" selected>Monthly</option><option value="3m">Every 3 months</option><option value="1y">Yearly</option></select></div><div><label for="bDue">Next due</label><input id="bDue" type="date"></div></div>
+    <div class="acts"><button class="btn" data-act="badd">Add bill</button></div>
+  </div>
+  <div id="billList"></div>
+</div>
+
+<div id="vPeople" hidden>
+  <h2>Partners</h2>
+  <div class="card" id="partners"></div>
+  <div class="two" style="margin-top:10px"><input id="pName" placeholder="Name" aria-label="Partner name"><input id="pMail" type="email" placeholder="Email (optional)" aria-label="Partner email"></div>
+  <div class="acts"><button class="btn" id="addPartner">Add partner</button></div>
+  <h2>Reminders</h2>
+  <div class="card" style="padding:14px">
+    <div class="acts" style="margin-top:0"><button class="btn" id="notif">Turn on notifications</button></div>
+    <div class="acts" style="margin-top:14px"><input type="checkbox" id="pDaily" data-pref="daily" style="width:20px;height:20px;padding:0" aria-label="Daily briefing"><span>Daily briefing at</span><input type="time" id="pdT" data-pref="dTime" style="width:auto" aria-label="Daily briefing time"></div>
+    <div class="acts"><input type="checkbox" id="pWeekly" data-pref="weekly" style="width:20px;height:20px;padding:0" aria-label="Weekly preview"><span>Weekly preview on</span><select id="pwD" data-pref="wDay" style="width:auto;padding:6px 8px" aria-label="Weekly preview day"><option value="0">Sunday</option><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option></select><span>at</span><input type="time" id="pwT" data-pref="wTime" style="width:auto" aria-label="Weekly preview time"></div>
+    <p class="note" id="notifNote">Alerts appear when a chore is due, while this page is open in a browser tab. For reminders when it is closed, add chores to your calendar.</p>
+  </div>
+  <h2>Calendar</h2>
+  <div class="card" style="padding:14px">
+    <button class="btn ghost" id="ics">Export all chores to calendar</button>
+    <div id="icsBox" hidden>
+      <label for="icsText">Calendar file text</label><textarea id="icsText" readonly></textarea>
+      <div class="acts"><button class="btn sm" id="copyIcs">Copy text</button></div>
+      <p class="note">Paste into a text file named chores.ics, then import it into Google, Apple or Outlook Calendar. Each chore repeats on its own schedule with a 9am alert. Your daily and weekly briefing reminders are included.</p>
+    </div>
+    <p class="note">You can also add a single chore with its Calendar link in the lists.</p>
+  </div>
+</div>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<button class="btn fab" id="open" aria-label="Add a chore">+ Add chore</button>
+
+<dialog id="dlg">
+  <h3>Add a chore</h3>
+  <label>Quick add: your list and home-care ideas</label><div class="chips" id="sugg"></div>
+  <label for="cName">Or type your own</label><input id="cName" placeholder="e.g. Clean the oven">
+  <label>How often?</label>
+  <div class="chips" id="freq">
+    <button class="pick" data-f="1w">Weekly</button><button class="pick" data-f="2w">Every 2 weeks</button><button class="pick" data-f="1m" aria-pressed="true">Monthly</button><button class="pick" data-f="1y">Yearly</button><button class="pick" data-f="custom">Custom</button>
+  </div>
+  <div class="two" id="customBox" hidden>
+    <div><label for="cN">Every</label><input id="cN" type="number" min="1" value="3"></div>
+    <div><label for="cU">Unit</label><select id="cU"><option value="d">days</option><option value="w">weeks</option><option value="m" selected>months</option><option value="y">years</option></select></div>
+  </div>
+  <div class="two">
+    <div><label for="cStart">First due</label><input id="cStart" type="date"></div>
+    <div><label for="cWho">Assigned to</label><select id="cWho"></select></div>
+  </div>
+  <div class="acts" style="margin-top:16px"><button class="btn" id="addChore">Add chore</button><button class="btn ghost" id="cancel">Cancel</button></div>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
