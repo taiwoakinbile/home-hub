@@ -10,15 +10,15 @@
 </head>
 <body>
 <main>
-<h1>Home hub</h1>
+<div class="top"><h1>Home hub</h1><button class="theme" id="theme" aria-label="Switch theme">🌙</button></div>
 <div class="stats"><div class="stat od"><b id="sOd">0</b>overdue</div><div class="stat"><b id="sWeek">0</b>due this week</div><div class="stat"><b id="sAll">0</b>total chores</div></div>
 <div class="tabs" role="tablist">
-  <button class="tab" role="tab" data-tab="due">Today</button>
-  <button class="tab" role="tab" data-tab="all">Chores</button>
-  <button class="tab" role="tab" data-tab="meals">Meals</button>
-  <button class="tab" role="tab" data-tab="shop">Shop</button>
-  <button class="tab" role="tab" data-tab="bills">Bills</button>
-  <button class="tab" role="tab" data-tab="people">People</button>
+  <button class="tab" role="tab" data-tab="due"><span class="ic">🏠</span><span>Today</span></button>
+  <button class="tab" role="tab" data-tab="all"><span class="ic">🧹</span><span>Chores</span></button>
+  <button class="tab" role="tab" data-tab="meals"><span class="ic">🍽️</span><span>Meals</span></button>
+  <button class="tab" role="tab" data-tab="shop"><span class="ic">🛒</span><span>Shop</span></button>
+  <button class="tab" role="tab" data-tab="bills"><span class="ic">💡</span><span>Bills</span></button>
+  <button class="tab" role="tab" data-tab="people"><span class="ic">👨‍👩‍👧</span><span>People</span></button>
 </div>
 
 <div id="vDue"></div>
@@ -29,7 +29,7 @@
 </div>
 
 <div id="vMeals" hidden>
-  <div class="acts" style="margin:0 0 12px"><button class="btn" data-act="suggest">Suggest dinners</button><button class="btn ghost" data-act="mealshop">Add meals to shopping list</button><button class="btn ghost" data-act="clearmeals">Clear week</button></div>
+  <div class="acts" style="margin:0 0 12px"><button class="btn" data-act="suggest">🎲 Suggest dinners</button><button class="btn ghost" data-act="mealshop">🛒 Add meals to shopping list</button><button class="btn ghost" data-act="clearmeals">Clear week</button></div>
   <div id="mealGrid"></div>
 </div>
 
@@ -44,7 +44,7 @@
   <div class="card" style="padding:14px;margin:12px 0">
     <div class="two"><div><label for="bName">Bill or renewal</label><input id="bName" placeholder="e.g. Electricity"></div><div><label for="bAmt">Amount (optional)</label><input id="bAmt" type="number" min="0" placeholder="0"></div></div>
     <div class="two"><div><label for="bFreq">Repeats</label><select id="bFreq"><option value="1w">Weekly</option><option value="1m" selected>Monthly</option><option value="3m">Every 3 months</option><option value="1y">Yearly</option></select></div><div><label for="bDue">Next due</label><input id="bDue" type="date"></div></div>
-    <div class="acts"><button class="btn" data-act="badd">Add bill</button></div>
+    <div class="acts"><button class="btn" data-act="badd">💸 Add bill</button></div>
   </div>
   <div id="billList"></div>
 </div>
@@ -53,7 +53,7 @@
   <h2>Partners</h2>
   <div class="card" id="partners"></div>
   <div class="two" style="margin-top:10px"><input id="pName" placeholder="Name" aria-label="Partner name"><input id="pMail" type="email" placeholder="Email (optional)" aria-label="Partner email"></div>
-  <div class="acts"><button class="btn" id="addPartner">Add partner</button></div>
+  <div class="acts"><button class="btn" id="addPartner">👋 Add partner</button></div>
   <h2>Reminders</h2>
   <div class="card" style="padding:14px">
     <div class="acts" style="margin-top:0"><button class="btn" id="notif">Turn on notifications</button></div>
@@ -75,7 +75,7 @@
 </main>
 
 <div id="toast" role="status" aria-live="polite"></div>
-<button class="btn fab" id="open" aria-label="Add a chore">+ Add chore</button>
+<button class="btn fab" id="open" aria-label="Add a chore">✨ Add chore</button>
 
 <dialog id="dlg">
   <h3>Add a chore</h3>
